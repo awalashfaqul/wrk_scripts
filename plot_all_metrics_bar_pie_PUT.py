@@ -7,36 +7,21 @@ df = pd.read_csv("results_put.csv")
 # Metrics to plot
 metrics = {
     "LatencyAvgMs": ("Average Latency", "Latency (ms)", ['salmon', 'orange']),
-    "LatencyStdevMs": ("Latency Std Dev", "Std Dev (ms)", ['lightblue', 'gold']),
-    "LatencyMaxMs": ("Max Latency", "Latency (ms)", ['plum', 'lightcoral']),
-    "LatencyPlusMinusStdevPercent": ("Latency +/- Std Dev", "Percent (%)", ['lightgray', 'lightpink']),
     "ReqPerSecAvg": ("Average Requests/sec", "Requests/sec", ['skyblue', 'lightgreen']),
-    "ReqPerSecStdev": ("Requests/sec Std Dev", "Std Dev", ['lightskyblue', 'khaki']),
-    "ReqPerSecMax": ("Max Requests/sec", "Requests/sec", ['orchid', 'lightcyan']),
-    "ReqPerSecPlusMinusStdevPercent": ("Requests/sec +/- Std Dev", "Percent (%)", ['lightyellow', 'tomato']),
     "TransferPerSecMB": ("Transfer/sec", "MB/sec", ['lightseagreen', 'mediumaquamarine'])
 }
 
-# Plot each metric: Bar, Pie
-for metric, (title, ylabel, colors) in metrics.items():
-    fig, axs = plt.subplots(1, 2, figsize=(14, 5))
-    fig.suptitle("CRUD (PUT) Performance Comparison: .NET vs Phoenix", fontsize=20)
-    frameworks = df['Framework']
+# Create subplots (1 row, 3 columns)
+fig, axs = plt.subplots(1, 3, figsize=(18, 6))
+fig.suptitle("PUT Performance Comparison: .NET vs Phoenix", fontsize=18)
+
+# Iterate over metrics and draw pie charts
+for idx, (metric, (title, ylabel, colors)) in enumerate(metrics.items()):
     values = df[metric]
+    axs[idx].pie(values, labels=df['Framework'], autopct='%1.1f%%', colors=colors, startangle=140)
+    axs[idx].set_title(title)
 
-    # Bar Chart
-    axs[0].bar(frameworks, values, color=colors)
-    axs[0].set_title(f"{title} (Bar Chart)")
-    axs[0].set_ylabel(ylabel)
-    axs[0].grid(axis='y')
-
-    # Pie Chart
-    axs[1].pie(values, labels=frameworks, autopct='%1.1f%%', colors=colors)
-    axs[1].set_title(f"{title} (Pie Chart)")
-
-
-    # Layout & Save
-    plt.tight_layout()
-    filename = metric.lower() + "_charts.png"
-    plt.savefig(filename)
-    plt.show()
+# Final layout
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.savefig("put_pie_comparison.png")
+plt.show()

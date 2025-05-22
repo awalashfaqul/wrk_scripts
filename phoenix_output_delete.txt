@@ -1,0 +1,10 @@
+Running 30s test @ http://localhost:4000/api/table
+  4 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   404.72ms  183.31ms   1.99s    91.25%
+    Req/Sec    71.14     43.68   230.00     68.89%
+  7327 requests in 30.10s, 65.45MB read
+  Socket errors: connect 0, read 7326, write 0, timeout 59
+  Non-2xx or 3xx responses: 7326
+Requests/sec:    243.41
+Transfer/sec:      2.17MB

@@ -1,6 +1,6 @@
 request = function()
   wrk.method = "DELETE"
-  return wrk.format(nil, "/api/tables/5e0b8f4-1c2d-4a3b-9c5f-7a2d6e5f3b8") -- Replace with valid UUID
+  return wrk.format(nil, "/api/tables/37d84060-d89c-4b17-984a-68a6166d425f") -- Replace with valid UUID
 end
 
 done = function(summary, latency, requests)

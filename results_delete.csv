@@ -1,3 +1,3 @@
 Framework,LatencyAvgMs,ReqPerSecAvg,TransferPerSecMB
-.NET,3.69,31830.0,11.79
-Phoenix,341.15,87.1,2.4
+.NET,0.68758,32670,12.28
+Phoenix,404.72,71.14,2.17

@@ -1,3 +1,3 @@
-Framework,LatencyAvgMs,LatencyStdevMs,LatencyMaxMs,LatencyPlusMinusStdevPercent,ReqPerSecAvg,ReqPerSecStdev,ReqPerSecMax,ReqPerSecPlusMinusStdevPercent,TransferPerSecMB
-.NET,4.31,29.45,403.67,98.08,32800,3030,37600,91.00,12.13
-Phoenix,277.60,88.88,1010.00,94.78,96.76,52.03,242.00,64.99,2.52
+Framework,LatencyAvgMs,ReqPerSecAvg,TransferPerSecMB
+.NET,4.31,32800,12.13
+Phoenix,277.60,96.76,2.52

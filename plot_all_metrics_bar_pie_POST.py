@@ -4,39 +4,25 @@ import matplotlib.pyplot as plt
 # Load the data
 df = pd.read_csv("results_post.csv")
 
-# Metrics to plot
+# Define metrics to plot
 metrics = {
     "LatencyAvgMs": ("Average Latency", "Latency (ms)", ['salmon', 'orange']),
-    "LatencyStdevMs": ("Latency Std Dev", "Std Dev (ms)", ['lightblue', 'gold']),
-    "LatencyMaxMs": ("Max Latency", "Latency (ms)", ['plum', 'lightcoral']),
-    "LatencyPlusMinusStdevPercent": ("Latency +/- Std Dev", "Percent (%)", ['lightgray', 'lightpink']),
     "ReqPerSecAvg": ("Average Requests/sec", "Requests/sec", ['skyblue', 'lightgreen']),
-    "ReqPerSecStdev": ("Requests/sec Std Dev", "Std Dev", ['lightskyblue', 'khaki']),
-    "ReqPerSecMax": ("Max Requests/sec", "Requests/sec", ['orchid', 'lightcyan']),
-    "ReqPerSecPlusMinusStdevPercent": ("Requests/sec +/- Std Dev", "Percent (%)", ['lightyellow', 'tomato']),
     "TransferPerSecMB": ("Transfer/sec", "MB/sec", ['lightseagreen', 'mediumaquamarine'])
 }
 
-# Plot each metric: Bar, Pie
-for metric, (title, ylabel, colors) in metrics.items():
-    fig, axs = plt.subplots(1, 2, figsize=(14, 5))
-    fig.suptitle("CRUD (POST) Performance Comparison: .NET vs Phoenix", fontsize=20)
-    frameworks = df['Framework']
+# Create one figure with 3 pie charts
+fig, axs = plt.subplots(1, 3, figsize=(18, 6))
+fig.suptitle("POST Performance Comparison (.NET vs Phoenix)", fontsize=20)
+
+# Loop through each metric and corresponding axis
+for ax, (metric, (title, ylabel, colors)) in zip(axs, metrics.items()):
     values = df[metric]
+    labels = df['Framework']
+    ax.pie(values, labels=labels, autopct='%1.1f%%', colors=colors, startangle=140)
+    ax.set_title(title)
 
-    # Bar Chart
-    axs[0].bar(frameworks, values, color=colors)
-    axs[0].set_title(f"{title} (Bar Chart)")
-    axs[0].set_ylabel(ylabel)
-    axs[0].grid(axis='y')
-
-    # Pie Chart
-    axs[1].pie(values, labels=frameworks, autopct='%1.1f%%', colors=colors)
-    axs[1].set_title(f"{title} (Pie Chart)")
-
-
-    # Layout & Save
-    plt.tight_layout()
-    filename = metric.lower() + "_charts.png"
-    plt.savefig(filename)
-    plt.show()
+# Layout and save
+plt.tight_layout(rect=[0, 0, 1, 0.93])  # Adjust for the suptitle
+plt.savefig("post_comparison_piecharts.png")
+plt.show()
