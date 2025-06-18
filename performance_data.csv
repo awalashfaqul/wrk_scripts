@@ -1,0 +1,9 @@
+Operation,Metric,EF Core (.NET),Ecto (Phoenix)
+POST,Avg Latency (ms),4.31,277.60
+POST,Avg Requests/sec,32800,96.76
+GET,Avg Latency (ms),7.37,248.00
+GET,Avg Requests/sec,120549.23,103.06
+PUT,Avg Latency (ms),3.69,341.15
+PUT,Avg Requests/sec,31830,87.10
+DELETE,Avg Latency (ms),0.68758,404.72
+DELETE,Avg Requests/sec,32670,71.14

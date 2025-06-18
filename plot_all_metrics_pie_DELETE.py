@@ -11,15 +11,16 @@ metrics = {
     "TransferPerSecMB": ("Transfer/sec", "MB/sec", ['lightseagreen', 'mediumaquamarine'])
 }
 
-# Create 1 row with 3 pie charts
+# Create 1 row with 3 bar charts
 fig, axs = plt.subplots(1, 3, figsize=(18, 6))
 fig.suptitle("DELETE Performance Comparison: .NET vs Phoenix", fontsize=18)
 
 for i, (metric, (title, ylabel, colors)) in enumerate(metrics.items()):
-    values = df[metric]
-    axs[i].pie(values, labels=df['Framework'], autopct='%1.1f%%', colors=colors)
-    axs[i].set_title(f"{title}", fontsize=14)
+    axs[i].bar(df['Framework'], df[metric], color=colors)
+    axs[i].set_title(title, fontsize=14)
+    axs[i].set_ylabel(ylabel)
+    axs[i].set_ylim(0, df[metric].max() * 1.2)  # Add some space above max value
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig("delete_pie_comparison.png")
+plt.savefig("delete_bar_comparison.png")
 plt.show()

@@ -15,13 +15,14 @@ metrics = {
 fig, axs = plt.subplots(1, 3, figsize=(18, 6))
 fig.suptitle("PUT Performance Comparison: .NET vs Phoenix", fontsize=18)
 
-# Iterate over metrics and draw pie charts
+# Iterate over metrics and draw bar charts
 for idx, (metric, (title, ylabel, colors)) in enumerate(metrics.items()):
-    values = df[metric]
-    axs[idx].pie(values, labels=df['Framework'], autopct='%1.1f%%', colors=colors, startangle=140)
+    axs[idx].bar(df['Framework'], df[metric], color=colors)
     axs[idx].set_title(title)
+    axs[idx].set_ylabel(ylabel)
+    axs[idx].set_ylim(0, df[metric].max() * 1.2)  # Add some padding above bars
 
-# Final layout
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-plt.savefig("put_pie_comparison.png")
+# Final layout adjustment
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.savefig("put_bar_comparison.png")
 plt.show()
